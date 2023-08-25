@@ -12,8 +12,6 @@ import (
 //go:embed static
 var staticFiles embed.FS
 
-//go:embed templates
-var templateFiles embed.FS
 
 func RunHTTPServer(ctx context.Context) error {
 	cfg := ctx.Value(ConfigKey).(Config)
