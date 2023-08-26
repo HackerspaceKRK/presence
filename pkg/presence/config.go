@@ -2,7 +2,6 @@ package presence
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"reflect"
 )
@@ -42,7 +41,6 @@ func LoadConfig() (Config, error) {
 		}
 		value.SetString(os.Getenv(tag))
 	}
-	log.Printf("Loaded configuration from environment variables: %+v", cfg)
 	if err := ValidateConfig(cfg); err != nil {
 		return Config{}, err
 	}

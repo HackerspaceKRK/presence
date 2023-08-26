@@ -1,21 +1,22 @@
 package presence
 
 import (
-	
+	"bytes"
+	"context"
 	"embed"
 	"html/template"
 	"log"
-	
+
 	"net/http"
 )
-
 
 //go:embed templates
 var templateFiles embed.FS
 
 var tpls = template.Must(template.ParseFS(templateFiles, "templates/*.html"))
 
-func ExecuteTemplateWithLayout(w http.ResponseWriter, name string, data map[string]any) {
+func ExecuteTemplateWithLayout(ctx context.Context, w http.ResponseWriter, name string, data map[string]any) {
+	cfg := ctx.Value(ConfigKey).(Config)
 	commonParams := map[string]any{
 		"Config": cfg,
 	}
