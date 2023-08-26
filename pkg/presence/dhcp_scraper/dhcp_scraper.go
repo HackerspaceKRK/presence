@@ -13,4 +13,5 @@ type DHCPLease struct {
 
 type DHCPScraper interface {
 	Setup(host string, username string, password string) error
+	Scrape() ([]DHCPLease, error)
 }

@@ -51,8 +51,6 @@ func (s *MikrotikDHCPScraper) Scrape() ([]DHCPLease, error) {
 		}
 		leases = append(leases, lease)
 
-		fmt.Printf("%#v\n", re.Map)
-
 	}
 
 	return leases, nil

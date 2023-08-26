@@ -13,7 +13,9 @@ func Run() {
 	}
 
 	ctx = context.WithValue(ctx, ConfigKey, cfg)
+	ctx = WithDHCPWorker(ctx)
 	if err := RunHTTPServer(ctx); err != nil {
 		log.Fatalf("Failed to run HTTP server: %v", err)
 	}
+
 }
