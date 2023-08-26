@@ -71,3 +71,12 @@ func (w *DHCPWorker) work(ctx context.Context) {
 		}
 	}
 }
+
+func (w *DHCPWorker) CountByVendor() map[string]int {
+	counts := map[string]int{}
+	for _, lease := range w.CurrentLeases {
+		name := LookupOuiByMAC(lease.MAC)
+		counts[name]++
+	}
+	return counts
+}

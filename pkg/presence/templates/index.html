@@ -6,5 +6,15 @@ Currently at the hackerspace:
 </ul>
 
 <p>
-    There are {{ len .DHCPWorker.CurrentLeases }} devices on the network.
+    There are <strong>{{ len .DHCPWorker.CurrentLeases }}</strong> devices in total on the network.
 </p>
+<ul>
+    {{ range $name, $count := .DHCPWorker.CountByVendor }}
+        {{ if eq $name "Espressif Inc." }}
+           <li><strong>{{ $count }}</strong> ESP devices</li>
+        {{ end }}
+        {{ if eq $name "Raspberry Pi Foundation" }}
+           <li><strong>{{ $count }}</strong> Raspberry Pis</li>
+        {{ end }}
+    {{ end }}
+</ul>
