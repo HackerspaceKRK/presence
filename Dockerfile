@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app with static linking and strip the binary
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o presence .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o presence ./cmd/presence
 
 # Step 2: Use a 'scratch' image, which is an empty image
 FROM scratch
