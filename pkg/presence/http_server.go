@@ -19,8 +19,29 @@ func RunHTTPServer(ctx context.Context) error {
 	m.Handle("/static/", http.FileServer(http.FS(staticFiles)))
 
 	m.Handle("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		dhcpWorker := r.Context().Value(DHCPWorkerKey).(*DHCPWorker)
+		if !dhcpWorker.ConnectionOK() {
+			errText := ""
+			if dhcpWorker.LastError != nil {
+				errText = dhcpWorker.LastError.Error()
+			}
+			ExecuteTemplateWithLayout(r.Context(), w, "message.html", map[string]any{
+				"Title":            "Presence unavailable",
+				"Details":          "Connection with the DHCP server has failed. Please try again in a few minutes.",
+				"TechnicalDetails": errText,
+			})
+			return
+		}
 		ExecuteTemplateWithLayout(r.Context(), w, "index.html", map[string]any{
 			"UsersInside": []string{"user1", "user2", "user3"},
+		})
+	}))
+
+	m.Handle("/enroll", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		ExecuteTemplateWithLayout(r.Context(), w, "enroll.html", map[string]any{
+			"MAC":        "00:00:00:00:00:00",
+			"Username":   "user1",
+			"DeviceName": "user1's phone",
 		})
 	}))
 

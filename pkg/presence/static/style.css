@@ -6,13 +6,73 @@ body, html {
 
 body {
     background: #fff;
-    color: #000;
+    color: #333;
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.5;
+}
+
+a {
+    color: #ff5100;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    padding: 0.5em 1em;
+    background: #ff5100;
+    border-radius: 3px;
+    color: #eee;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    cursor: pointer;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
 }
+
+.field {
+    margin-bottom: 0.5em;
+}
+
+.field label {
+    display: block;
+    font-weight: bold;
+}
+
+.field .tip {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.field input {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.message {
+    padding: 1em 1em;
+    background: #bdc3c7;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-radius: 3px;
+}
+
+.message.error {
+    background: #e74c3c;
+    color: #eee;
+}
+
+.message h2, .message p {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-top:0 ;
+    margin-bottom: 0;
+}
+

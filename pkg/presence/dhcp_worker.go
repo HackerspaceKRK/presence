@@ -2,6 +2,7 @@ package presence
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -34,6 +35,8 @@ func WithDHCPWorker(ctx context.Context) context.Context {
 	w := &DHCPWorker{
 		Scraper: scraper,
 	}
+	w.NumFailedScrapes = 999
+	w.LastError = fmt.Errorf("DHCP scraper is starting up")
 	go w.work(ctx)
 	return context.WithValue(ctx, DHCPWorkerKey, w)
 }
@@ -79,4 +82,8 @@ func (w *DHCPWorker) CountByVendor() map[string]int {
 		counts[name]++
 	}
 	return counts
+}
+
+func (w *DHCPWorker) ConnectionOK() bool {
+	return w.NumFailedScrapes <= 1
 }

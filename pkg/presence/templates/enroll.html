@@ -1,0 +1,31 @@
+<h2>
+    Device enrollment
+</h2>
+<a href="/">&LeftArrow; Back</a>
+<p>
+    You are enrolling the MAC address device you are currently using to access this page. Whenever the device is detected on the network, you will be marked as present in the Hackerspace.
+</p>
+<form action="/enroll" method="post">
+    <div class="field">
+        <label for="username">Username</label>
+        <div class="tip">
+            Will be visible when you are at the Hackerspace.
+        </div>
+        <input type="text" name="username" id="username" value="{{ .Username }}" disabled />
+        <div class="tip">
+            Not you? <a href="/logout">Log out</a>.
+        </div>
+    </div>
+    <div class="field">
+        <label for="mac">MAC address of the device</label>
+        <input type="text" name="mac" id="mac" value="{{ .MAC }}" disabled />
+    </div>
+    <div class="field">
+        <label for="device-name">Name of the device (only visible to you)</label>
+        <div class="tip">
+            Only visible to you.
+        </div>
+        <input type="text" name="device-name" id="device-name" value="{{ .DeviceName }}" />
+    </div>
+    <button type="submit" class="button" disabled>Enroll</button>
+</form>
